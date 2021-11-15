@@ -33,6 +33,7 @@ public class NettyServer {
                         // 给pipeline设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+                            System.out.println("客户socketChannel hashCode=" + ch.hashCode());//可以使用一个集合管理socketChannel，在推送消息时可以将业务加入到各个channel对应的NIOEventLoop的taskQueue或者scheduleTaskQueue
                             ch.pipeline().addLast(new NettyServerHandler());
                         }
                     }); //给我们的workerGroup的EventLoop对应的管道设置处理器
