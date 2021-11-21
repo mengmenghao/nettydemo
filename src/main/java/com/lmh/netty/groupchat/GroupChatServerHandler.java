@@ -10,8 +10,14 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 
 import javax.sound.midi.Soundbank;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {
+    // 使用一个hasmap 管理
+//    public static Map<String, Channel> channels = new HashMap<String,Channel>();
+//    public static Map<User, Channel> channels2 = new HashMap<User,Channel>();
     // 定义一个channel组，管理所有channel
     // GlobalEventExecutor.INSTANCE 是全局的事件执行器，是一个单例
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
@@ -26,8 +32,11 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
         /**
          * channelGroup.writeAndFlush会将channelGroup中所有的channnel遍历，并发送消息
          */
-        channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + "加入聊天");
+        channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + sdf.format(new Date()) + "加入聊天");
         channelGroup.add(channel);
+
+//        channels.put("id100",channel);
+//        channels2.put(new User(10,"123"),channel);
     }
 
     // 表示channel处于活动状态，提示xxx上线
