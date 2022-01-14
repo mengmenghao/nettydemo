@@ -13,7 +13,7 @@ public class MyClient {
             bootstrap.group(group).channel(NioSocketChannel.class)
                     .handler(new MyClientInitializer());// 自定义一个初始化对象
 
-            ChannelFuture localhost = bootstrap.connect("127.0.0.1", 7000).sync();
+            ChannelFuture localhost = bootstrap.connect("127.0.0.1", 52240).sync();
             localhost.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully();

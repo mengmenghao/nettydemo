@@ -25,6 +25,12 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     }
 
     @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        ByteBuf byteBuf = Unpooled.copiedBuffer("倒角机01.总产量设定", CharsetUtil.UTF_8);
+        ctx.writeAndFlush(byteBuf);
+    }
+
+    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // 使用客户端发送10条数据
         for (int i = 0; i < 10; i++) {
